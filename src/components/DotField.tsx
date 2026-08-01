@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, memo, HTMLAttributes } from 'react';
+import React, { useEffect, useRef, memo, HTMLAttributes, useId } from 'react';
 
 interface DotFieldProps extends HTMLAttributes<HTMLDivElement> {
   dotRadius?: number;
@@ -61,7 +61,8 @@ const DotField = memo(({
   propsRef.current = { dotRadius, dotSpacing, cursorRadius, cursorForce, bulgeOnly, bulgeStrength, sparkle, waveAmplitude, gradientFrom, gradientTo };
   
   const rebuildRef = useRef<(() => void) | null>(null);
-  const glowIdRef = useRef(`dot-field-glow-${Math.random().toString(36).slice(2, 9)}`);
+  const baseId = useId().replace(/:/g, '');
+  const glowIdRef = useRef(`dot-field-glow-${baseId}`);
 
   useEffect(() => {
     const canvas = canvasRef.current;

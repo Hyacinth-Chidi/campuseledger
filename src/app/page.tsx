@@ -30,26 +30,27 @@ export default function LandingPage() {
             glowColor="rgba(155, 162, 220, 0.08)"
           />
         </div>
-        
+
         {/* Dynamic Graphic Orbit Elements */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0 overflow-hidden hidden md:flex">
-          <div className="absolute top-[20%] left-[10%] xl:left-[18%] bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 animate-[bounce_4s_infinite]">
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20 overflow-hidden hidden md:flex">
+          <div className="absolute top-[15%] left-[2%] lg:left-[8%] xl:left-[15%] bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 animate-[bounce_4s_infinite]">
             <Award className="size-8 text-amber-500" />
           </div>
-          <div className="absolute bottom-[20%] left-[15%] xl:left-[22%] bg-white/90 backdrop-blur-sm p-3.5 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 animate-[bounce_5s_infinite_1s]">
+          <div className="absolute bottom-[20%] left-[8%] lg:left-[15%] xl:left-[22%] bg-white/90 backdrop-blur-sm p-3.5 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 animate-[bounce_5s_infinite_1s]">
             <Key className="size-6 text-indigo-500" />
           </div>
-          <div className="absolute top-[25%] right-[10%] xl:right-[18%] bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 animate-[bounce_6s_infinite_2s]">
+          <div className="absolute top-[20%] right-[2%] lg:right-[8%] xl:right-[15%] bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 animate-[bounce_6s_infinite_2s]">
             <Fingerprint className="size-8 text-purple-500" />
           </div>
-          <div className="absolute bottom-[25%] right-[15%] xl:right-[22%] bg-white/90 backdrop-blur-sm p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-blue-100 animate-[bounce_7s_infinite_1.5s]">
+          <div className="absolute bottom-[25%] right-[8%] lg:right-[15%] xl:right-[22%] bg-white/90 backdrop-blur-sm p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-blue-100 animate-[bounce_7s_infinite_1.5s]">
             <ShieldCheck className="size-10 text-blue-600" />
           </div>
         </div>
-        <div className="max-w-4xl space-y-6 z-10">
+        <div className="max-w-5xl w-full px-4 space-y-6 z-10">
           <AnimatedBadge />
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground">
-            Decentralized Identity for the <span className="text-primary">Modern Campus</span>
+          <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-black tracking-tight text-foreground leading-[1.1]">
+            Decentralized Identity for  <br className="hidden md:block" />
+            <span className="text-primary"> the Modern Campus</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Empower your students with cryptographically secure, verifiable credentials. No more phone calls, no more paper transcripts. Just instant, mathematically proven verification.
@@ -203,7 +204,7 @@ export default function LandingPage() {
               </ScrollReveal>
             </ul>
           </div>
-          
+
           <ScrollReveal delayMs={200} className="relative rounded-2xl border border-slate-800/80 bg-[#0B0F19] p-0 shadow-[0_0_60px_-15px_rgba(59,130,246,0.4)] overflow-hidden hidden lg:block">
             {/* Mac Window Controls */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-800/60 bg-slate-900/50">
@@ -212,11 +213,11 @@ export default function LandingPage() {
               <div className="size-3 rounded-full bg-green-500/80" />
               <div className="ml-4 text-xs text-slate-500 font-mono">credential.json</div>
             </div>
-            
+
             <div className="p-8 relative font-mono text-sm leading-relaxed text-slate-400 space-y-4">
               {/* Decorative background element for the mock code/data */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-              
+
               <div className="relative">
                 <div><span className="text-blue-400">{"{"}</span></div>
                 <div className="pl-4">
@@ -260,7 +261,7 @@ export default function LandingPage() {
         {/* Abstract shapes */}
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-black/10 rounded-full blur-3xl pointer-events-none" />
-        
+
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Ready to modernize your institution?</h2>
           <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto">
@@ -287,7 +288,7 @@ export default function LandingPage() {
                 Empowering students, institutions, and employers with mathematically proven, cryptographically secure academic credentials.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-slate-900 mb-5">Platform</h4>
               <ul className="space-y-3.5 text-sm text-slate-500 font-medium">
@@ -297,7 +298,7 @@ export default function LandingPage() {
                 <li><Link href="https://github.com/w3c/vc-data-model" target="_blank" className="hover:text-primary transition-colors flex items-center">W3C Spec <ChevronRight className="size-3 ml-1" /></Link></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-slate-900 mb-5">Solutions</h4>
               <ul className="space-y-3.5 text-sm text-slate-500 font-medium">
@@ -306,7 +307,7 @@ export default function LandingPage() {
                 <li><Link href="#features" className="hover:text-primary transition-colors">For Employers</Link></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-slate-900 mb-5">Company</h4>
               <ul className="space-y-3.5 text-sm text-slate-500 font-medium">
@@ -316,7 +317,7 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          
+
           <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400 font-medium">
             <p>© {new Date().getFullYear()} CampusLedger Inc. All rights reserved.</p>
             <div className="flex gap-6">
