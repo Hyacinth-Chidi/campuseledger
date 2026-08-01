@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Award, Share2, Building2, Wallet } from "lucide-react";
+import { Award, Share2, Building2, ShieldCheck } from "lucide-react";
 import { format } from "date-fns";
 
-export function StudentCredentialsClient({ credentials }: { credentials: any[] }) {
+export function StudentShareClient({ credentials }: { credentials: any[] }) {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="absolute top-0 right-0 -z-10 w-full h-[400px] bg-gradient-to-bl from-blue-100/50 via-transparent to-transparent opacity-60" />
@@ -15,9 +14,9 @@ export function StudentCredentialsClient({ credentials }: { credentials: any[] }
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-            <Wallet className="size-6 text-blue-600" /> Digital Wallet
+            <Share2 className="size-6 text-blue-600" /> Share a Credential
           </h1>
-          <p className="text-sm text-slate-500 mt-1">All your verifiable credentials cryptographically secured on the ledger.</p>
+          <p className="text-sm text-slate-500 mt-1">Select an active credential below to generate a secure, verifiable proof link.</p>
         </div>
       </div>
 
@@ -29,9 +28,9 @@ export function StudentCredentialsClient({ credentials }: { credentials: any[] }
                 <div className="p-3 bg-white rounded-full shadow-sm border border-slate-100 mb-3">
                   <Award className="size-6 text-slate-400" />
                 </div>
-                <h3 className="text-base font-semibold text-slate-900">Your wallet is empty</h3>
+                <h3 className="text-base font-semibold text-slate-900">No active credentials available</h3>
                 <p className="text-sm text-slate-500 max-w-sm mt-1">
-                  When an institution issues you a credential, it will appear here instantly.
+                  You don't have any active credentials to share yet.
                 </p>
               </div>
             </div>
@@ -46,17 +45,16 @@ export function StudentCredentialsClient({ credentials }: { credentials: any[] }
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
               >
-                <div className="flex flex-col h-full rounded-xl border border-indigo-50/50 bg-white/80 backdrop-blur-xl p-4 hover:shadow-lg transition-all duration-300 group relative overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
-                  {/* Accent glow on hover */}
+                <div className="flex flex-col h-full rounded-xl border border-indigo-50/50 bg-white/80 backdrop-blur-xl p-4 hover:shadow-lg transition-all duration-300 group relative overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.03)] cursor-pointer">
                   <div className="absolute top-0 right-0 p-12 bg-gradient-to-bl from-blue-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity -z-10 rounded-bl-full" />
                   
                   <div className="flex items-start justify-between mb-4">
                     <div className="size-10 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center shrink-0 border border-blue-100/50 shadow-sm group-hover:scale-105 transition-transform">
                       <Award className="size-5 text-blue-600" />
                     </div>
-                    <Badge className={c.status === "revoked" ? "bg-red-50 text-red-700 hover:bg-red-50 border-red-200 text-[10px] px-2 py-0.5" : "bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-emerald-200 text-[10px] px-2 py-0.5"}>
-                      {c.status.charAt(0).toUpperCase() + c.status.slice(1)}
-                    </Badge>
+                    <div className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1">
+                      <ShieldCheck className="size-3" /> Verifiable
+                    </div>
                   </div>
                   
                   <div className="flex-1 space-y-1 mb-4">
@@ -74,9 +72,9 @@ export function StudentCredentialsClient({ credentials }: { credentials: any[] }
                   </div>
 
                   <div className="pt-3 border-t border-slate-100 mt-auto">
-                    <Button asChild className="w-full bg-blue-50 text-blue-700 hover:bg-blue-100 border-none shadow-none font-semibold transition-colors h-9 text-xs rounded-lg">
+                    <Button asChild className="w-full bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/20 font-semibold transition-all h-9 text-xs rounded-lg">
                       <Link href={`/student/dashboard/share/${c._id.toString()}`}>
-                        <Share2 className="size-3 mr-1.5" /> Create Share Proof
+                        Select & Create Proof <Share2 className="size-3 ml-1.5" />
                       </Link>
                     </Button>
                   </div>

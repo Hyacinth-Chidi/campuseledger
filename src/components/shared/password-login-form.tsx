@@ -43,41 +43,43 @@ export function PasswordLoginForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <Alert variant="destructive" className="bg-red-50 text-red-700 border-red-200 rounded-xl">
-          <AlertDescription className="font-medium">{error}</AlertDescription>
+        <Alert variant="destructive" className="bg-red-50 text-red-700 border-red-200 rounded-lg p-3">
+          <AlertDescription className="font-medium text-sm">{error}</AlertDescription>
         </Alert>
       )}
-      <div className="space-y-2">
-        <Label htmlFor="email" className="text-slate-700 font-semibold text-sm">Email</Label>
+      <div className="space-y-1.5">
+        <Label htmlFor="email" className="text-slate-700 font-semibold text-sm">Email Address</Label>
         <Input 
           id="email" 
           type="email" 
           value={email} 
           onChange={(e) => setEmail(e.target.value)} 
-          className="h-14 bg-slate-50/50 border-slate-200 rounded-xl text-[15px] focus-visible:ring-4 focus-visible:ring-blue-500/10 focus-visible:border-blue-500 focus-visible:bg-white transition-all shadow-sm placeholder:text-slate-400"
+          className="h-10 text-sm bg-slate-50/50 border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 focus-visible:bg-white transition-all shadow-sm placeholder:text-slate-400"
+          placeholder="admin@campusledger.com"
           required 
         />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="password" className="text-slate-700 font-semibold text-sm">Password</Label>
         <Input
           id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="h-14 bg-slate-50/50 border-slate-200 rounded-xl text-[15px] focus-visible:ring-4 focus-visible:ring-blue-500/10 focus-visible:border-blue-500 focus-visible:bg-white transition-all shadow-sm"
+          className="h-10 text-sm bg-slate-50/50 border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 focus-visible:bg-white transition-all shadow-sm placeholder:text-slate-400"
+          placeholder="••••••••"
           required
         />
       </div>
       <Button 
         type="submit" 
-        className="group w-full h-14 rounded-xl bg-[#1d4ed8] hover:bg-[#153bb5] hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 text-[15px] font-semibold transition-all duration-200 mt-4" 
+        className="group w-full h-10 rounded-lg bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 text-sm font-semibold transition-all duration-200 mt-2 text-white" 
         disabled={loading}
       >
-        {loading ? <Loader2 className="mr-2 size-5 animate-spin" /> : null}
-        {loading ? "Logging in..." : <>Log In <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" /></>}
+        {loading ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
+        {loading ? "Logging in..." : <>Log In <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" /></>}
       </Button>
     </form>
   );

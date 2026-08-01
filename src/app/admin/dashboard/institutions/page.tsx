@@ -51,7 +51,7 @@ export default function AdminInstitutionsPage() {
 
   const handleAction = async () => {
     if (!actionDialog.type || !actionDialog.institution) return;
-    
+
     const { type, institution } = actionDialog;
     setBusyId(institution._id);
     setActionDialog({ isOpen: false, type: null, institution: null });
@@ -71,10 +71,10 @@ export default function AdminInstitutionsPage() {
 
   const filteredInstitutions = useMemo(() => {
     return institutions.filter((inst) => {
-      const matchesSearch = 
+      const matchesSearch =
         inst.institutionName.toLowerCase().includes(search.toLowerCase()) ||
         inst.email.toLowerCase().includes(search.toLowerCase());
-      
+
       let matchesFilter = true;
       if (filter === "pending") matchesFilter = !inst.approved && !inst.suspended;
       if (filter === "approved") matchesFilter = inst.approved && !inst.suspended;
@@ -89,128 +89,129 @@ export default function AdminInstitutionsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto">
+    <div className="space-y-4 max-w-6xl mx-auto">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Institutions</h1>
-        <p className="text-lg text-slate-500 mt-2">Manage and approve institutions on the CampusLedger network.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Institutions</h1>
+        <p className="text-sm text-slate-500 mt-1">Manage and approve institutions on the CampusLedger network.</p>
       </div>
 
-      <Card className="border-indigo-100/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl">
-        <CardHeader className="border-b border-indigo-50/50 bg-slate-50/50 pb-5 pt-6 px-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="relative max-w-sm w-full group">
-              <Search className="absolute left-3.5 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+      <div className="border border-indigo-100/60 shadow-[0_4px_20px_rgb(0,0,0,0.03)] rounded-xl overflow-hidden bg-white/80 backdrop-blur-xl flex flex-col">
+        <div className="border-b border-indigo-50/50 bg-slate-50/50 pb-3 pt-4 px-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="relative max-w-xs w-full group">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
               <Input
                 type="search"
                 placeholder="Search institutions..."
-                className="pl-11 h-12 text-base bg-white border-slate-200 focus-visible:border-blue-500 focus-visible:ring-blue-500/20 shadow-sm rounded-xl transition-all"
+                className="pl-9 h-9 text-sm bg-white border-slate-200 focus-visible:border-blue-500 focus-visible:ring-blue-500/20 shadow-sm rounded-lg transition-all"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <div className="flex gap-1.5 p-1.5 bg-slate-100/80 rounded-xl w-max border border-slate-200/50 shadow-inner">
+            <div className="flex gap-1 p-1 bg-slate-100/80 rounded-lg w-max border border-slate-200/50 shadow-inner">
               {(["all", "pending", "approved", "suspended"] as const).map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-5 py-2 text-base font-medium rounded-lg capitalize transition-all duration-300 ${
-                    filter === f ? "bg-white text-blue-700 shadow-[0_2px_10px_rgba(0,0,0,0.06)]" : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
-                  }`}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md capitalize transition-all duration-300 ${filter === f ? "bg-white text-blue-700 shadow-[0_2px_10px_rgba(0,0,0,0.06)]" : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
+                    }`}
                 >
                   {f}
                 </button>
               ))}
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader className="bg-slate-50/30">
-              <TableRow className="text-base hover:bg-transparent border-indigo-50/50">
-                <TableHead className="w-[300px] pl-8 h-14 font-semibold text-slate-600">Institution</TableHead>
-                <TableHead className="h-14 font-semibold text-slate-600">Students</TableHead>
-                <TableHead className="h-14 font-semibold text-slate-600">Status</TableHead>
-                <TableHead className="text-right pr-8 h-14 font-semibold text-slate-600">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredInstitutions.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={4} className="h-32 text-center text-slate-500">
-                    No institutions found.
-                  </TableCell>
+        </div>
+        <div className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-slate-50/30">
+                <TableRow className="text-xs hover:bg-transparent border-indigo-50/50">
+                  <TableHead className="w-[300px] pl-4 h-10 font-semibold text-slate-600">Institution</TableHead>
+                  <TableHead className="h-10 font-semibold text-slate-600">Students</TableHead>
+                  <TableHead className="h-10 font-semibold text-slate-600">Status</TableHead>
+                  <TableHead className="text-right pr-4 h-10 font-semibold text-slate-600">Actions</TableHead>
                 </TableRow>
-              ) : (
-                filteredInstitutions.map((inst) => (
-                  <TableRow key={inst._id} className="group hover:bg-blue-50/30 transition-colors duration-300 border-indigo-50/50">
-                    <TableCell className="pl-8 py-5">
-                      <div className="flex items-center gap-4">
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-3 rounded-xl border border-blue-100/50 shadow-sm">
-                          <Building2 className="size-6 text-blue-600" />
+              </TableHeader>
+              <TableBody>
+                {filteredInstitutions.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="h-24 text-center text-sm text-slate-500">
+                      No institutions found.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredInstitutions.map((inst) => (
+                    <TableRow key={inst._id} className="group hover:bg-blue-50/30 transition-colors duration-300 border-indigo-50/50">
+                      <TableCell className="pl-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-2 rounded-lg border border-blue-100/50 shadow-sm">
+                            <Building2 className="size-4 text-blue-600" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-sm text-slate-900 line-clamp-1">{inst.institutionName}</div>
+                            <div className="text-xs text-slate-500 truncate">{inst.email}</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-semibold text-lg text-slate-900">{inst.institutionName}</div>
-                          <div className="text-base text-slate-500">{inst.email}</div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="font-semibold text-lg text-slate-900">{inst.studentCount}</div>
-                      <div className="text-sm text-slate-500">Registered</div>
-                    </TableCell>
-                    <TableCell>
-                      {inst.suspended ? (
-                        <Badge variant="destructive" className="bg-red-50 text-red-700 hover:bg-red-50 border-red-200 text-sm px-3 py-1">Suspended</Badge>
-                      ) : inst.approved ? (
-                        <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-emerald-200 text-sm px-3 py-1">Approved</Badge>
-                      ) : (
-                        <Badge className="bg-amber-50 text-amber-700 hover:bg-amber-50 border-amber-200 text-sm px-3 py-1">Pending</Badge>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-right pr-8">
-                      <div className="flex justify-end gap-3">
-                        {!inst.approved && !inst.suspended && (
-                          <>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="text-emerald-700 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 shadow-sm rounded-lg"
-                              disabled={busyId === inst._id}
-                              onClick={() => openDialog(inst, "approve")}
-                            >
-                              <ShieldCheck className="size-4 mr-1.5" /> Approve
-                            </Button>
+                      </TableCell>
+                      <TableCell className="py-3">
+                        <div className="font-semibold text-sm text-slate-900">{inst.studentCount}</div>
+                        <div className="text-xs text-slate-500">Registered</div>
+                      </TableCell>
+                      <TableCell className="py-3">
+                        {inst.suspended ? (
+                          <Badge variant="destructive" className="bg-red-50 text-red-700 hover:bg-red-50 border-red-200 text-xs px-2 py-0.5">Suspended</Badge>
+                        ) : inst.approved ? (
+                          <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-emerald-200 text-xs px-2 py-0.5">Approved</Badge>
+                        ) : (
+                          <Badge className="bg-amber-50 text-amber-700 hover:bg-amber-50 border-amber-200 text-xs px-2 py-0.5">Pending</Badge>
+                        )}
+                      </TableCell>
+                      <TableCell className="text-right pr-4 py-3">
+                        <div className="flex justify-end gap-2">
+                          {!inst.approved && !inst.suspended && (
+                            <>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="h-7 text-xs text-emerald-700 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 shadow-sm rounded-md"
+                                disabled={busyId === inst._id}
+                                onClick={() => openDialog(inst, "approve")}
+                              >
+                                <ShieldCheck className="size-3 mr-1" /> Approve
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-7 text-xs text-slate-500 hover:text-red-600 hover:bg-red-50"
+                                disabled={busyId === inst._id}
+                                onClick={() => openDialog(inst, "reject")}
+                              >
+                                Reject
+                              </Button>
+                            </>
+                          )}
+                          {inst.approved && (
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-slate-500 hover:text-red-600 hover:bg-red-50"
+                              className="h-7 text-xs text-slate-500 hover:text-red-600 hover:bg-red-50"
                               disabled={busyId === inst._id}
-                              onClick={() => openDialog(inst, "reject")}
+                              onClick={() => openDialog(inst, inst.suspended ? "reinstate" : "suspend")}
                             >
-                              Reject
+                              <Ban className="size-3 mr-1" /> {inst.suspended ? "Reinstate" : "Suspend"}
                             </Button>
-                          </>
-                        )}
-                        {inst.approved && (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="text-slate-500 hover:text-red-600 hover:bg-red-50"
-                            disabled={busyId === inst._id}
-                            onClick={() => openDialog(inst, inst.suspended ? "reinstate" : "suspend")}
-                          >
-                            <Ban className="size-4 mr-1.5" /> {inst.suspended ? "Reinstate" : "Suspend"}
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      </div>
 
       {/* Action Confirmation Dialog */}
       <Dialog open={actionDialog.isOpen} onOpenChange={(open) => !open && setActionDialog({ ...actionDialog, isOpen: false })}>
@@ -228,7 +229,7 @@ export default function AdminInstitutionsPage() {
             <Button variant="outline" onClick={() => setActionDialog({ ...actionDialog, isOpen: false })}>
               Cancel
             </Button>
-            <Button 
+            <Button
               variant={actionDialog.type === "reject" || actionDialog.type === "suspend" ? "destructive" : "default"}
               onClick={handleAction}
             >

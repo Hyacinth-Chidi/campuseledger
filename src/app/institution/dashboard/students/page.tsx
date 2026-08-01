@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback, useMemo } from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -97,146 +96,148 @@ export default function StudentsPage() {
   }, [students, search]);
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
+    <div className="space-y-4 max-w-6xl mx-auto">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Students</h1>
-        <p className="text-lg text-slate-500 mt-2">Manage your roster and invite new students to the network.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Students</h1>
+        <p className="text-sm text-slate-500 mt-1">Manage your roster and invite new students to the network.</p>
       </div>
 
-      <Card className="border-indigo-100/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl">
-        <CardHeader className="bg-slate-50/50 border-b border-indigo-50/50 pb-6">
-          <CardTitle className="text-xl font-bold tracking-tight text-slate-900">Invite a Student</CardTitle>
-          <CardDescription className="text-base mt-1">
-            Invite a student to your institution's network. They will automatically receive an email with instructions to activate their account.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-6 space-y-6">
+      <div className="border border-indigo-100/60 shadow-[0_4px_20px_rgb(0,0,0,0.03)] rounded-xl overflow-hidden bg-white/80 backdrop-blur-xl flex flex-col">
+        <div className="bg-slate-50/50 border-b border-indigo-50/50 pb-3 pt-4 px-4">
+          <h2 className="text-base font-bold tracking-tight text-slate-900">Invite a Student</h2>
+          <p className="text-xs mt-0.5 text-slate-500">
+            Invite a student to your institution&apos;s network. They will automatically receive an email with instructions to activate their account.
+          </p>
+        </div>
+        <div className="p-4 space-y-4">
           {error && (
-            <Alert variant="destructive" className="border-red-200 bg-red-50 text-red-900 rounded-xl">
-              <AlertDescription className="text-base font-medium">{error}</AlertDescription>
+            <Alert variant="destructive" className="border-red-200 bg-red-50 text-red-900 rounded-lg">
+              <AlertDescription className="text-sm font-medium">{error}</AlertDescription>
             </Alert>
           )}
           {successMessage && (
-            <Alert className="border-emerald-200 bg-emerald-50 text-emerald-900 rounded-xl">
-              <AlertDescription className="text-base font-medium">
+            <Alert className="border-emerald-200 bg-emerald-50 text-emerald-900 rounded-lg">
+              <AlertDescription className="text-sm font-medium">
                 {successMessage}
               </AlertDescription>
             </Alert>
           )}
-          <form onSubmit={handleInvite} className="grid grid-cols-1 md:grid-cols-4 gap-5 items-end">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="text-sm font-semibold text-slate-700">Full Name</Label>
-              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required className="h-12 bg-slate-50/50 border-slate-200 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 rounded-xl transition-all" />
+          <form onSubmit={handleInvite} className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+            <div className="space-y-1.5">
+              <Label htmlFor="name" className="text-xs font-semibold text-slate-700">Full Name</Label>
+              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required className="h-9 text-sm bg-slate-50/50 border-slate-200 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 rounded-lg transition-all" />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="studentIdNumber" className="text-sm font-semibold text-slate-700">Student ID</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="studentIdNumber" className="text-xs font-semibold text-slate-700">Student ID</Label>
               <Input
                 id="studentIdNumber"
                 value={studentIdNumber}
                 onChange={(e) => setStudentIdNumber(e.target.value)}
                 required
-                className="h-12 bg-slate-50/50 border-slate-200 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 rounded-xl transition-all"
+                className="h-9 text-sm bg-slate-50/50 border-slate-200 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 rounded-lg transition-all"
               />
             </div>
-            <div className="space-y-2 md:col-span-1">
-              <Label htmlFor="email" className="text-sm font-semibold text-slate-700">Email Address</Label>
-              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 bg-slate-50/50 border-slate-200 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 rounded-xl transition-all" />
+            <div className="space-y-1.5 md:col-span-1">
+              <Label htmlFor="email" className="text-xs font-semibold text-slate-700">Email Address</Label>
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-9 text-sm bg-slate-50/50 border-slate-200 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 rounded-lg transition-all" />
             </div>
-            <Button type="submit" disabled={loading} className="h-12 md:col-span-1 w-full bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 rounded-xl transition-all font-semibold text-base">
-              {loading ? <Loader2 className="size-5 animate-spin" /> : <><UserPlus className="mr-2 size-5" /> Invite Student</>}
+            <Button type="submit" disabled={loading} className="h-9 md:col-span-1 w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-500/20 rounded-lg transition-all font-semibold text-sm">
+              {loading ? <Loader2 className="size-4 animate-spin" /> : <><UserPlus className="mr-1.5 size-4" /> Invite Student</>}
             </Button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="border-indigo-100/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl">
-        <CardHeader className="bg-slate-50/50 border-b border-indigo-50/50 pb-5 pt-6 px-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="border border-indigo-100/60 shadow-[0_4px_20px_rgb(0,0,0,0.03)] rounded-xl overflow-hidden bg-white/80 backdrop-blur-xl flex flex-col">
+        <div className="bg-slate-50/50 border-b border-indigo-50/50 pb-3 pt-4 px-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <CardTitle className="text-xl font-bold tracking-tight text-slate-900">Student Roster</CardTitle>
-              <CardDescription className="text-base mt-1">All students invited by your institution.</CardDescription>
+              <h2 className="text-base font-bold tracking-tight text-slate-900">Student Roster</h2>
+              <p className="text-xs mt-0.5 text-slate-500">All students invited by your institution.</p>
             </div>
-            <div className="relative max-w-sm w-full group">
-              <Search className="absolute left-3.5 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+            <div className="relative max-w-xs w-full group">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
               <Input
                 type="search"
                 placeholder="Search students..."
-                className="pl-11 h-12 text-base bg-white border-slate-200 focus-visible:border-blue-500 focus-visible:ring-blue-500/20 shadow-sm rounded-xl transition-all"
+                className="pl-9 h-9 text-sm bg-white border-slate-200 focus-visible:border-blue-500 focus-visible:ring-blue-500/20 shadow-sm rounded-lg transition-all"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader className="bg-slate-50/30">
-              <TableRow className="text-base hover:bg-transparent border-indigo-50/50">
-                <TableHead className="w-[300px] pl-8 h-14 font-semibold text-slate-600">Student</TableHead>
-                <TableHead className="h-14 font-semibold text-slate-600">Student ID</TableHead>
-                <TableHead className="h-14 font-semibold text-slate-600">Status</TableHead>
-                <TableHead className="h-14 font-semibold text-slate-600">Joined Date</TableHead>
-                <TableHead className="text-right pr-8 h-14 font-semibold text-slate-600">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredStudents.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={5} className="h-32 text-center text-slate-500 text-base">
-                    No students found.
-                  </TableCell>
+        </div>
+        <div className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-slate-50/30">
+                <TableRow className="text-xs hover:bg-transparent border-indigo-50/50">
+                  <TableHead className="w-[280px] pl-4 h-10 font-semibold text-slate-600">Student</TableHead>
+                  <TableHead className="h-10 font-semibold text-slate-600">Student ID</TableHead>
+                  <TableHead className="h-10 font-semibold text-slate-600">Status</TableHead>
+                  <TableHead className="h-10 font-semibold text-slate-600">Joined Date</TableHead>
+                  <TableHead className="text-right pr-4 h-10 font-semibold text-slate-600">Actions</TableHead>
                 </TableRow>
-              ) : (
-                filteredStudents.map((s) => (
-                  <TableRow key={s._id} className="group hover:bg-blue-50/30 transition-colors duration-300 border-indigo-50/50">
-                    <TableCell className="pl-8 py-5">
-                      <div className="flex items-center gap-4">
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-2.5 rounded-xl border border-blue-100/50 shadow-sm">
-                          <User className="size-5 text-blue-600" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-lg text-slate-900">{s.name}</div>
-                          <div className="text-base text-slate-500">{s.email}</div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="font-medium text-slate-700 text-base">{s.studentIdNumber}</div>
-                    </TableCell>
-                    <TableCell>
-                      {s.status === "active" ? (
-                        <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-emerald-200 text-sm px-3 py-1 font-medium">Active</Badge>
-                      ) : (
-                        <Badge variant="secondary" className="bg-slate-100 text-slate-700 hover:bg-slate-100 border-slate-200 text-sm px-3 py-1 font-medium">Invited</Badge>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-base text-slate-500">
-                      {new Date(s.createdAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="text-right pr-8">
-                      {s.status === "invited" && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm rounded-lg"
-                          disabled={reinvitingId === s._id}
-                          onClick={() => handleReinvite(s._id)}
-                        >
-                          {reinvitingId === s._id ? (
-                            <Loader2 className="size-4 animate-spin" />
-                          ) : (
-                            <><RefreshCw className="size-4 mr-1.5" /> Resend Invite</>
-                          )}
-                        </Button>
-                      )}
+              </TableHeader>
+              <TableBody>
+                {filteredStudents.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className="h-24 text-center text-sm text-slate-500">
+                      No students found.
                     </TableCell>
                   </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+                ) : (
+                  filteredStudents.map((s) => (
+                    <TableRow key={s._id} className="group hover:bg-blue-50/30 transition-colors duration-300 border-indigo-50/50">
+                      <TableCell className="pl-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-2 rounded-lg border border-blue-100/50 shadow-sm">
+                            <User className="size-4 text-blue-600" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-sm text-slate-900">{s.name}</div>
+                            <div className="text-xs text-slate-500">{s.email}</div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="py-3">
+                        <div className="font-medium text-sm text-slate-700">{s.studentIdNumber}</div>
+                      </TableCell>
+                      <TableCell className="py-3">
+                        {s.status === "active" ? (
+                          <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-emerald-200 text-xs px-2 py-0.5 font-medium">Active</Badge>
+                        ) : (
+                          <Badge variant="secondary" className="bg-slate-100 text-slate-700 hover:bg-slate-100 border-slate-200 text-xs px-2 py-0.5 font-medium">Invited</Badge>
+                        )}
+                      </TableCell>
+                      <TableCell className="text-xs text-slate-500 py-3">
+                        {new Date(s.createdAt).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="text-right pr-4 py-3">
+                        {s.status === "invited" && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="h-7 text-xs text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm rounded-md"
+                            disabled={reinvitingId === s._id}
+                            onClick={() => handleReinvite(s._id)}
+                          >
+                            {reinvitingId === s._id ? (
+                              <Loader2 className="size-3 animate-spin" />
+                            ) : (
+                              <><RefreshCw className="size-3 mr-1" /> Resend Invite</>
+                            )}
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

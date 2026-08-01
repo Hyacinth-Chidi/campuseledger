@@ -15,7 +15,11 @@ const NAV_ITEMS = [
   { label: "Security", href: "/student/dashboard/security", icon: Shield },
 ];
 
-export function StudentSidebar() {
+interface StudentSidebarProps {
+  onClose?: () => void;
+}
+
+export function StudentSidebar({ onClose }: StudentSidebarProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -31,31 +35,34 @@ export function StudentSidebar() {
   }
 
   return (
-    <aside className="hidden lg:flex w-64 flex-col fixed inset-y-0 z-50 bg-white/80 backdrop-blur-xl border-r border-indigo-100/60 shadow-[4px_0_24px_rgb(0,0,0,0.02)]">
-      <div className="p-6">
-        <Link href="/" className="flex items-center">
-          <Image src="/logo.png" alt="CampusLedger Logo" width={180} height={40} className="object-contain" />
+    <aside className="flex flex-col h-full bg-white/80 backdrop-blur-xl border-r border-indigo-100/60 shadow-[4px_0_24px_rgb(0,0,0,0.02)]">
+      <div className="h-16 flex items-center px-6 border-b border-indigo-50 bg-gradient-to-b from-blue-50/50 to-transparent">
+        <Link href="/" className="flex items-center" onClick={onClose}>
+          <Image src="/logo.png" alt="CampusLedger Logo" width={150} height={35} className="object-contain" />
         </Link>
-        <div className="mt-8 flex items-center gap-2 px-2 py-1.5 bg-blue-50/50 border border-blue-100 rounded-lg w-fit">
-          <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-          <span className="text-xs font-semibold text-blue-700 uppercase tracking-wider">Student Wallet</span>
+      </div>
+
+      <div className="px-4 py-3 border-b border-indigo-50/50">
+        <div className="flex items-center gap-2 px-2 py-1 bg-blue-50/50 border border-blue-100 rounded-md w-fit">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+          <span className="text-[10px] font-semibold text-blue-700 uppercase tracking-wider">Student Wallet</span>
         </div>
       </div>
 
-      <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href || (item.href !== "/student/dashboard" && pathname.startsWith(item.href));
           return (
-            <Link key={item.href} href={item.href} className="block">
+            <Link key={item.href} href={item.href} className="block" onClick={onClose}>
               <div
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-[15px]",
+                  "flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 font-medium text-sm",
                   isActive
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                    ? "bg-blue-600 text-white shadow-sm shadow-blue-500/20"
                     : "text-slate-600 hover:bg-blue-50/50 hover:text-blue-700"
                 )}
               >
-                <item.icon className={cn("size-5", isActive ? "text-white" : "text-slate-400")} />
+                <item.icon className={cn("size-4", isActive ? "text-white" : "text-slate-400")} />
                 {item.label}
               </div>
             </Link>
@@ -66,14 +73,15 @@ export function StudentSidebar() {
       <div className="p-4 mt-auto border-t border-indigo-50/50 bg-slate-50/30">
         <Button
           variant="ghost"
-          onClick={handleLogout}
-          className="w-full justify-start text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors h-12 rounded-xl text-[15px]"
+          onClick={() => {
+            handleLogout();
+            onClose?.();
+          }}
+          className="w-full justify-start text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors h-10 rounded-lg text-sm"
         >
-          <div className="flex items-center gap-3 w-full">
-            <div className="bg-white p-1.5 rounded-lg border border-slate-200 shadow-sm group-hover:border-red-200 transition-colors">
-              <LogOut className="size-4" />
-            </div>
-            <span className="font-semibold">Log out</span>
+          <div className="flex items-center gap-2.5 w-full">
+            <LogOut className="size-4" />
+            <span className="font-medium">Log out</span>
           </div>
         </Button>
       </div>
