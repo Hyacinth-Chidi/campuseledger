@@ -168,7 +168,7 @@ export default function AdminInstitutionsPage() {
                       )}
                     </TableCell>
                     <TableCell className="text-right pr-8">
-                      <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex justify-end gap-3">
                         {!inst.approved && !inst.suspended && (
                           <>
                             <Button
